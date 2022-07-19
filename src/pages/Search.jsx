@@ -68,16 +68,18 @@ export default function Search() {
               </div>
               <h2 className="search__text">Search results for:</h2>
               <div className="movies">
-                <div className="movie">
-                  <figure className="movie__img--wrapper">
-                    <img
-                      className="movie__img"
-                      src="https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg"
-                      alt=""
-                    />
-                  </figure>
-                  <h3 className="movie__title">movie (Year)</h3>
-                </div>
+                {movies.map((movie) => (
+                  <div className="movie">
+                    <figure className="movie__img--wrapper">
+                      <img
+                        className="movie__img"
+                        src="https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg"
+                        alt=""
+                      />
+                    </figure>
+                    <h3 className="movie__title">movie (Year)</h3>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
