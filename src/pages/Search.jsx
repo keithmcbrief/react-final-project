@@ -66,7 +66,7 @@ export default function Search() {
                   search
                 </button>
               </div>
-              <h2 className="search__text">Search results for:</h2>
+              <h2 className="search__text">Searchh results for:</h2>
               <div className="movies">
                 {movies.map((movie) => (
                   <div className="movie">
