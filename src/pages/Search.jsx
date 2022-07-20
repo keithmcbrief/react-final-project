@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Movie from "../components/Movie";
 
 export default function Search() {
@@ -51,12 +51,12 @@ export default function Search() {
                 />
               </figure>
               <div className="nav__links">
-                <a className="nav__link" href="/">
+                <Link className="nav__link" to="/">
                   Home
-                </a>
-                <a className="nav__link" href="/search">
+                </Link>
+                <Link className="nav__link" to="/search">
                   Find your movie
-                </a>
+                </Link>
                 <button className="contact">CONTACT</button>
               </div>
             </div>

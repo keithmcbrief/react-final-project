@@ -50,11 +50,11 @@ export default function Home() {
           <div className="row row__landing">
             <div className="content__wrapper">
               <h1 className="title">
-                America's most awarded movie subscription platform
+                America's most awarded streaming platform
               </h1>
               <h2 className="sub-title">
-                The perfect movie is waiting for you at{" "}
-                <span className="secondary">MovieHub</span>
+                The perfect <span className="secondary">movie</span> is waiting for you at{" "}
+                <span className="secondary">MovieHub.</span>
               </h2>
               <div className="search__wrapper">
                 <input
