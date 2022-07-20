@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function MoviePage() {
-  const params = useParams()
+  const { id } = useParams();
+  const [movieData, setMovieData] = useState([]);
+
   async function getMovie() {
-    const movieData = await axios.get(`https://www.omdbapi.com/?apikey=3ee4c002&i=${params}`)
-    console.log(movieData)
+    const { data } = await axios.get(
+      `https://www.omdbapi.com/?apikey=3ee4c002&i=${id}`
+    );
+    setMovieData(data);
+    console.log(data);
   }
-  getMovie()
+
+  useEffect(() => {
+    getMovie();
+  }, []);
   return (
     <>
       <nav className="nav__search">
@@ -40,30 +48,29 @@ export default function MoviePage() {
           <div className="row">
             <div className="container__flex">
               <figure className="description__img--wrapper">
-                <img
-                  src="https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg"
-                  alt=""
-                  className="movie__image"
-                />
+                <img src={movieData.Poster} alt="" className="movie__image" />
               </figure>
               <div className="description__content--wrapper">
-                <h2 className="description__title">movie</h2>
-                <h3 className="description__year">Released: 2020</h3>
-                <p className="description__para">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Perspiciatis autem atque ex odit qui totam repellendus
-                  voluptas accusantium beatae dolorum.
-                </p>
-                <p className="description__para">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Perspiciatis autem atque ex odit qui totam repellendus
-                  voluptas accusantium beatae dolorum.
-                </p>
-                <p className="description__para">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Perspiciatis autem atque ex odit qui totam repellendus
-                  voluptas accusantium beatae dolorum.
-                </p>
+                <h1 className="description__title">
+                  {movieData.Title} ({movieData.Year})
+                </h1>
+                <h3 className="description__runtime">
+                Runtime: {movieData.Runtime}
+                </h3>
+                <h3 className="description__actors">
+                  Actors: {movieData.Actors}
+                </h3>
+                <h3 className="description__genre">
+                  Genre: {movieData.Genre}
+                </h3>
+                <h3 className="description__ratings">
+                  imDB Rating: {movieData.imdbRating}
+                </h3>
+                <h3 className="description__language">
+                  Languages: {movieData.Language}
+                </h3>
+                <h3 className="description__summary">Summary</h3>
+                <p className="description__para">{movieData.Plot}</p>
               </div>
             </div>
           </div>

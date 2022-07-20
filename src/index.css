@@ -283,12 +283,18 @@ input:focus {
 
 .description__title,
 .description__year,
+.description__ratings,
+.description__runtime,
+.description__actors,
+.description__genre,
+.description__summary,
+.description__language,
 .description__para {
   color: white;
+  margin-bottom: 24px;
 }
 
 .description__title {
-  margin-bottom: 60px;
 }
 .description__year {
   margin-bottom: 60px;
@@ -300,6 +306,7 @@ input:focus {
 .container__flex {
   display: flex;
   justify-content: center;
+  margin-top: 80px;
 }
 
 .description__content--wrapper {
