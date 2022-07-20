@@ -35,7 +35,7 @@ export default function Home() {
                 <a className="nav__link" href="/">
                   Home
                 </a>
-                <a className="nav__link" href="/search">
+                <a className="nav__link" href="search">
                   Find your movie
                 </a>
                 <button className="contact">CONTACT</button>
@@ -69,7 +69,8 @@ export default function Home() {
                     }
                   }}
                 />
-                <button className="btn btn__home" onClick={() => homeSearch()}>
+                <button className="btn btn__home" onClick={() => homeSearch()}
+                disabled={!input}>
                   {loading && <RefreshIcon className="loading" />}
                   {!loading && <SearchIcon className="home__search--icon" />}
                 </button>

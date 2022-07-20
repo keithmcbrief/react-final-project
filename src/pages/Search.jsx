@@ -10,7 +10,7 @@ export default function Search() {
   const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
 
-  const params = useParams;
+  const params = useParams();
   console.log(params);
 
   // http://www.omdbapi.com/?i=tt3896198&apikey=3ee4c002
@@ -25,12 +25,14 @@ export default function Search() {
 
   useEffect(() => {
     setLoading(true);
-    // fetchOnSearch();
+    setTimeout(() => {
+      fetchOnSearch(input);
+    }, 300);
   }, []);
 
   async function fetchOnSearch() {
     const { data } = await axios.get(
-      `https://www.omdbapi.com/?apikey=3ee4c002&s=${input}`
+      `https://www.omdbapi.com/?apikey=3ee4c002&s=${params.input || input}`
     );
     setMovies(data.Search);
     setLoading(false);
@@ -81,7 +83,7 @@ export default function Search() {
               />
               <SearchIcon className="search__icon" onClick={() => onSearch()} />
             </div>
-            <h2 className="search__text">Search results for: {input}</h2>
+            <h2 className="search__text">Search results for: {params.input || input}</h2>
             <div className="movies">
               {loading &&
                 new Array(6).fill(0).map((element) => (
