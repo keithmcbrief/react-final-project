@@ -7,28 +7,33 @@ import Movie from "../components/Movie";
 export default function Search() {
   const [movies, setMovies] = useState([]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
-  
-  const params = useParams
-  console.log(params)
+
+  const params = useParams;
+  console.log(params);
 
   // http://www.omdbapi.com/?i=tt3896198&apikey=3ee4c002
   // http://www.omdbapi.com/?apikey=3ee4c002&
 
   function onSearch() {
-    fetchOnSearch(input);
+    setLoading(true);
+    setTimeout(() => {
+      fetchOnSearch(input);
+    }, 300);
   }
 
-  // useEffect(() => {
-  //   fetchMovies();
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    // fetchOnSearch();
+  }, []);
 
   async function fetchOnSearch() {
     const { data } = await axios.get(
       `https://www.omdbapi.com/?apikey=3ee4c002&s=${input}`
     );
-    console.log(data)
     setMovies(data.Search);
+    setLoading(false);
   }
 
   return (
@@ -70,23 +75,33 @@ export default function Search() {
                 value={input}
                 onKeyPress={(event) => {
                   if (event.key === "Enter") {
-                    onSearch()
+                    onSearch();
                   }
                 }}
               />
               <SearchIcon className="search__icon" onClick={() => onSearch()} />
             </div>
-            <h2 className="search__text">Search results for: "{input}"</h2>
+            <h2 className="search__text">Search results for: {input}</h2>
             <div className="movies">
-              {movies
-                .map(movie => (
-                  <Movie
-                  id={movie.imdbID}
-                  image={movie.Poster}
-                  title={movie.Title}
-                  year={movie.Year} />
-                ))
-                .slice(0, 6)}
+              {loading &&
+                new Array(6).fill(0).map((element) => (
+                  <div className="movie__skeleton">
+                    <div className="movie__skeleton--img" />
+                    <div className="movie__skeleton--title" />
+                  </div>
+                ))}
+
+              {!loading &&
+                movies
+                  .map((movie) => (
+                    <Movie
+                      id={movie.imdbID}
+                      image={movie.Poster}
+                      title={movie.Title}
+                      year={movie.Year}
+                    />
+                  ))
+                  .slice(0, 6)}
             </div>
           </div>
         </div>
