@@ -277,6 +277,37 @@ input:focus {
 
 /* Movie Page */
 
+.back__wrapper{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 40px;
+}
+
+.btn__back {
+  transition: all 300ms ease;
+}
+
+.back__wrapper:hover .btn__back {
+  transform: scale(1.1);
+}
+.back__wrapper:hover {
+  cursor: pointer;
+}
+
+.back__text {
+  color: white;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.btn__back {
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
 .description__img--wrapper {
   width: 30%;
 }
@@ -309,7 +340,7 @@ input:focus {
 .container__flex {
   display: flex;
   justify-content: center;
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .description__content--wrapper {

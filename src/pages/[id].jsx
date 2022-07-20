@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { ArrowLeftIcon, SearchCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function MoviePage() {
   const { id } = useParams();
   const [movieData, setMovieData] = useState([]);
+  const navigate = useNavigate();
 
   async function getMovie() {
     const { data } = await axios.get(
@@ -46,6 +48,10 @@ export default function MoviePage() {
       <main>
         <div className="container">
           <div className="row">
+            <div className="back__wrapper" onClick={() => navigate("/search")}>
+              <ArrowLeftIcon className="btn__back" />{" "}
+              <span className="back__text">Movies</span>
+            </div>
             <div className="container__flex">
               <figure className="description__img--wrapper">
                 <img src={movieData.Poster} alt="" className="movie__image" />
@@ -55,14 +61,12 @@ export default function MoviePage() {
                   {movieData.Title} ({movieData.Year})
                 </h1>
                 <h3 className="description__runtime">
-                Runtime: {movieData.Runtime}
+                  Runtime: {movieData.Runtime}
                 </h3>
                 <h3 className="description__actors">
                   Actors: {movieData.Actors}
                 </h3>
-                <h3 className="description__genre">
-                  Genre: {movieData.Genre}
-                </h3>
+                <h3 className="description__genre">Genre: {movieData.Genre}</h3>
                 <h3 className="description__ratings">
                   imDB Rating: {movieData.imdbRating}
                 </h3>

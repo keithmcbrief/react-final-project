@@ -11,10 +11,6 @@ export default function Search() {
   let navigate = useNavigate();
 
   const params = useParams();
-  console.log(params);
-
-  // http://www.omdbapi.com/?i=tt3896198&apikey=3ee4c002
-  // http://www.omdbapi.com/?apikey=3ee4c002&
 
   function onSearch() {
     setLoading(true);
@@ -83,7 +79,9 @@ export default function Search() {
               />
               <SearchIcon className="search__icon" onClick={() => onSearch()} />
             </div>
-            <h2 className="search__text">Search results for: {params.input || input}</h2>
+            <h2 className="search__text">
+              Search results for: {params.input || input}
+            </h2>
             <div className="movies">
               {loading &&
                 new Array(6).fill(0).map((element) => (
