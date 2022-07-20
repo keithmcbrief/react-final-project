@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/solid";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Movie from "../components/Movie";
 
 export default function Search() {
   const [movies, setMovies] = useState([]);
   const [input, setInput] = useState("");
+  const navigate = useNavigate();
+  // const params = useParams
+  // console.log(params)
 
   // http://www.omdbapi.com/?i=tt3896198&apikey=3ee4c002
   // http://www.omdbapi.com/?apikey=3ee4c002&
 
-  function onSearch(input) {
-    fetchMovies(input);
+  function onSearch() {
+    fetchOnSearch(input);
   }
 
-  useEffect(() => {
-    fetchMovies();
-  }, []);
+  // useEffect(() => {
+  //   fetchMovies();
+  // }, []);
 
-  async function fetchMovies() {
+  async function fetchOnSearch() {
     const { data } = await axios.get(
       `https://www.omdbapi.com/?apikey=3ee4c002&s=${input}`
     );
-    setMovies(data);
-    console.log(movies);
+    console.log(data)
+    setMovies(data.Search);
   }
 
   return (
@@ -33,7 +37,10 @@ export default function Search() {
           <div className="row">
             <div className="nav__container">
               <figure className="logo__wrapper">
-                <img src="./assets/logo.png" alt="" />
+                <img
+                  src="https://cdn.discordapp.com/attachments/678108003479715870/999077225800409098/ipiccy_image_6.png"
+                  alt=""
+                />
               </figure>
               <div className="nav__links">
                 <a className="nav__link" href="/">
@@ -51,36 +58,29 @@ export default function Search() {
 
       <section id="search">
         <div className="container">
-          <div className="row">
-            <div className="search__container">
-              <h1 className="browse">Browse our movies</h1>
-              <div className="input__wrapper">
-                <input
-                  className="search__input"
-                  type="text"
-                  placeholder="Search by Title"
-                  onChange={(event) => setInput(event.target.value)}
-                  value={input}
-                />
-                <button className="btn btn__search" onClick={() => onSearch()}>
-                  search
-                </button>
-              </div>
-              <h2 className="search__text">Searchh results for:</h2>
-              <div className="movies">
-                {movies.map((movie) => (
-                  <div className="movie">
-                    <figure className="movie__img--wrapper">
-                      <img
-                        className="movie__img"
-                        src="https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg"
-                        alt=""
-                      />
-                    </figure>
-                    <h3 className="movie__title">movie (Year)</h3>
-                  </div>
-                ))}
-              </div>
+          <div className="row__search">
+            <h1 className="browse">Browse our movies</h1>
+            <div className="input__wrapper">
+              <input
+                className="search__input"
+                type="text"
+                placeholder="Search by Title"
+                onChange={(event) => setInput(event.target.value)}
+                value={input}
+              />
+              <SearchIcon className="search__icon" onClick={() => onSearch()} />
+            </div>
+            <h2 className="search__text">Search results for: "{input}"</h2>
+            <div className="movies">
+              {movies
+                .map(movie => (
+                  <Movie
+                  id={movie.imdbID}
+                  image={movie.Poster}
+                  title={movie.Title}
+                  year={movie.Year} />
+                ))
+                .slice(0, 6)}
             </div>
           </div>
         </div>
