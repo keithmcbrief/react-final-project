@@ -7,9 +7,10 @@ import Movie from "../components/Movie";
 export default function Search() {
   const [movies, setMovies] = useState([]);
   const [input, setInput] = useState("");
-  const navigate = useNavigate();
-  // const params = useParams
-  // console.log(params)
+  let navigate = useNavigate();
+  
+  const params = useParams
+  console.log(params)
 
   // http://www.omdbapi.com/?i=tt3896198&apikey=3ee4c002
   // http://www.omdbapi.com/?apikey=3ee4c002&
@@ -67,6 +68,11 @@ export default function Search() {
                 placeholder="Search by Title"
                 onChange={(event) => setInput(event.target.value)}
                 value={input}
+                onKeyPress={(event) => {
+                  if (event.key === "Enter") {
+                    onSearch()
+                  }
+                }}
               />
               <SearchIcon className="search__icon" onClick={() => onSearch()} />
             </div>

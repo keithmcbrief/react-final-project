@@ -11,7 +11,7 @@ export default function Home() {
   function homeSearch(event) {
     setLoading(true);
     setTimeout(() => {
-      navigate(`/search`);
+      navigate(`/search/${input}`);
     }, 300);
   }
 
@@ -50,7 +50,7 @@ export default function Home() {
           <div className="row row__landing">
             <div className="content__wrapper">
               <h1 className="title">
-                America's most awarded movie subscription platfor
+                America's most awarded movie subscription platform
               </h1>
               <h2 className="sub-title">
                 The perfect movie is waiting for you at{" "}

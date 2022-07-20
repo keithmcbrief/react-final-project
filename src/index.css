@@ -104,7 +104,7 @@ input:focus {
 .content__wrapper {
   width: 100%;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 40px auto 0 auto;
 }
 
 .secondary {
@@ -287,7 +287,6 @@ input:focus {
 .description__runtime,
 .description__actors,
 .description__genre,
-.description__summary,
 .description__language,
 .description__para {
   color: white;
@@ -302,6 +301,11 @@ input:focus {
 .description__para {
   margin-bottom: 20px;
 }
+.description__summary {
+  color:white;
+  margin-bottom: 10px;
+}
+
 
 .container__flex {
   display: flex;
