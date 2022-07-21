@@ -20,18 +20,24 @@ export default function Search() {
   }
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      fetchOnSearch(input);
-    }, 300);
+    if (!params.input && !input) {
+      return;
+    } else {
+      setLoading(true);
+      setTimeout(() => {
+        fetchOnSearch(input);
+      }, 300);
+    }
   }, []);
 
   async function fetchOnSearch() {
-    const { data } = await axios.get(
-      `https://www.omdbapi.com/?apikey=3ee4c002&s=${params.input || input}`
-    );
-    setMovies(data.Search);
-    setLoading(false);
+    if (params.input || input) {
+      const { data } = await axios.get(
+        `https://www.omdbapi.com/?apikey=3ee4c002&s=${params.input || input}`
+      );
+      setMovies(data.Search);
+      setLoading(false);
+    }
   }
 
   return (
@@ -83,13 +89,21 @@ export default function Search() {
               Search results for: {params.input || input}
             </h2>
             <div className="movies">
-              {loading &&
+              {loading && (params.input || input)
+                ? new Array(6).fill(0).map((element) => (
+                    <div className="movie__skeleton">
+                      <div className="movie__skeleton--img" />
+                      <div className="movie__skeleton--title" />
+                    </div>
+                  ))
+                : ""}
+              {/* {loading &&
                 new Array(6).fill(0).map((element) => (
                   <div className="movie__skeleton">
                     <div className="movie__skeleton--img" />
                     <div className="movie__skeleton--title" />
                   </div>
-                ))}
+                ))} */}
 
               {!loading &&
                 movies
